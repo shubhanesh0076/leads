@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ 
+<style>
+    .row { 
+        width:688px";
+    }
+   
+</style>
+
+
+
+<div class="main-div">
+   <div class="container">
+        <div class="row" style = "margin-top:15px">
+            <div class="col-md-4">
+                <select class="form-select" name="country" id="country">
+                    <option value="">Country</option>
+                </select> 
+            </div>
+            <div class="col-md-4"> 
+                <select class="form-select" name="state" id="state">
+                    <option value="">State</option>
+                </select> 
+            </div>
+            <div class="col-md-4"> 
+                <select class="form-select" name="city" id="city">
+                    <option value="">City</option>
+                </select>
+            </div>
+        </div>
+   </div> 
+</div>
+
+{% comment %} <script>
+    let auth_token;
+    $(document).ready(function(){
+        // console.log("welcome");
+        $.ajax({
+            type: 'get',
+            url: 'https://www.universal-tutorial.com/api/getaccesstoken',
+            success: function(data){
+                auth_token=data.auth_token;
+                getCountry();
+//                $('#myData').val(data.title)
+            },
+            error: function(error){
+                console.log(error);
+            },
+            headers: {
+                "Accept": "application/json",
+                "api-token": "Ugk3HcxH4gnwMkXwvo45B-E4b9kMJE6PFwOGl8DOVRUK-TWBmqwdvWG7yE9ayGGCCwI",
+                "user-email": "shubhnesh0076@gmail.com"
+            }
+
+        })
+        $('#country').change(function(){
+            console.log("change country");
+            getState();
+        })
+         $('#state').change(function(){
+            console.log("change state");
+            getCity();
+        })
+    })
+    // function for country...
+    function getCountry(){
+        $.ajax({
+            type: 'get',
+            url: "https://www.universal-tutorial.com/api/countries/",
+            success: function(data){
+               // getState(auth_token);
+                // $('#country').val(data.country_name)
+                // console.log("country", data);
+                data.forEach(element => {
+                    $('#country').append('<option value="'+element.country_name+'">'+element.country_name+'</option>');
+                })
+            },
+            error: function(error){
+                console.log(error);
+            },
+            headers: {
+                "Authorization": "Bearer "+auth_token,
+                "Accept": "application/json"
+            }
+
+        })
+        
+    }
+    function getState(){
+            // let country_name="India"
+            let country_name=$('#country').val();
+            $.ajax({
+                type: 'get',
+                url: "https://www.universal-tutorial.com/api/states/"+country_name,
+                success: function(data){
+                    // getCity(auth_token);
+    //                $('#myData').val(data.title)
+                    // console.log("state",data);
+                    $('#state').empty();
+                    data.forEach(element => {
+                    $('#state').append('<option value="'+element.state_name+'">'+element.state_name+'</option>');
+                })
+                },
+                error: function(error){
+                    console.log(error);
+                },
+                headers: {
+                    "Authorization": "Bearer "+ auth_token,   
+                    "Accept": "application/json"
+                }
+
+            })
+
+    }
+    function getCity(){
+            // let state_name="Gujarat"
+            let state_name=$('#state').val();
+            $.ajax({
+                type: 'get',
+                url: "https://www.universal-tutorial.com/api/cities/"+state_name,
+                success: function(data){
+                    // getCity(auth_token);
+    //                $('#myData').val(data.title)
+                    // console.log("city", data);
+                    $('#city').empty();
+                    data.forEach(element => {
+                    $('#city').append('<option value="'+element.city_name+'">'+element.city_name+'</option>');
+                })
+                },
+                error: function(error){
+                    console.log(error);
+                },
+                headers: {
+                    "Authorization": "Bearer "+ auth_token,   
+                    "Accept": "application/json"
+                }
+
+            })
+
+    }
+
+
+         
+</script> {% endcomment %}
+
+<script>
+
+    $(document).ready(function(){
+        // console.log("welcome");
+       
+        $('#country').change(function(){
+            console.log("change country");
+            getState();
+        })
+         $('#state').change(function(){
+            console.log("change state");
+            getCity();
+        })
+    })
+    // function for country...
+    function getCountry(){
+        $.ajax({
+            type: 'get',
+            url: "https://api.covid19.api.com/summary" // "https://www.universal-tutorial.com/api/countries/",
+            success: function(data){
+               // getState(auth_token);
+                // $('#country').val(data.country_name)
+                // console.log("country", data);
+                data.forEach(element => {
+                    $('#country').append('<option value="'+element.country_name+'">'+element.country_name+'</option>');
+                })
+            },
+            error: function(error){
+                console.log(error);
+            },
+           
+
+        })
+        
+    }
+    function getState(){
+        alert("hello");
+            // let country_name="India"
+            let country_name=$('#country').val();
+            $.ajax({
+                type: 'get',
+                url: "https://www.universal-tutorial.com/api/states/"+country_name,
+                success: function(data){
+                    // getCity(auth_token);
+    //                $('#myData').val(data.title)
+                    // console.log("state",data);
+                    $('#state').empty();
+                    data.forEach(element => {
+                    $('#state').append('<option value="'+element.state_name+'">'+element.state_name+'</option>');
+                })
+                },
+                error: function(error){
+                    console.log(error);
+                },
+               
+            })
+
+    }
+    function getCity(){
+            // let state_name="Gujarat"
+            let state_name=$('#state').val();
+            $.ajax({
+                type: 'get',
+                url: "https://www.universal-tutorial.com/api/cities/"+state_name,
+                success: function(data){
+                    // getCity(auth_token);
+    //                $('#myData').val(data.title)
+                    // console.log("city", data);
+                    $('#city').empty();
+                    data.forEach(element => {
+                    $('#city').append('<option value="'+element.city_name+'">'+element.city_name+'</option>');
+                })
+                },
+                error: function(error){
+                    console.log(error);
+                },
+               
+            })
+
+    }
+
+
+         
+</script>
+
+
+{% endblock %}
